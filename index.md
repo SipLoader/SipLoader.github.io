@@ -1,37 +1,22 @@
-## Welcome to GitHub Pages
+## Fusing Speed Index during Web Page Loading
 
-You can use the [editor on GitHub](https://github.com/SipLoader/SipLoader.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+With conventional web page load metrics (e.g., Page Load Time) being blamed for deviating from actual user
+experiences, in recent years a more sensible and complex metric called Speed Index (SI) has been widely
+adopted to measure the user’s quality of experience (QoE). In brief, SI indicates how quickly a page is filled up
+with above-the-fold visible elements (or crucial elements for short). Till now, however, SI has been used as
+an elusive hindsight for performance evaluation, rather than an explicit heuristic to direct page loading. To
+demystify this, we examine the entire load process of various pages and ascribe such incapability to three-fold
+fundamental uncertainties in terms of network, browser execution, and viewport size. In this paper, we design
+SipLoader, an SI-oriented page loader through a novel cumulative reactive scheduling framework. It does not
+attempt to deal with uncertainties in advance or in one shot, but “repairs” the anticipated (nearly) SI-optimal
+scheduling when uncertainties actually occur, based on efficient design that fully exploits the cumulative
+nature of SI calculation. Evaluations show that SipLoader improves the median SI by 41%, and provides
+1.43×–1.99× more benefits than state-of-the-art solutions with little computation and traffic overhead.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### SipLoader
 
-### Markdown
+SipLoader is an SI-oriented page loader.
+It implements the cumulative predictive-reactive scheduling framework through three key techniques, i.e.,
+Dependency Mmerged Greedy Inference, Predictive Element Region Forest, and Event-Driven Reactive Co-Scheduling.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SipLoader/SipLoader.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+We provide the prototype system on [GitHub]() as well as the measurement data on [Google Drive]().
