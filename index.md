@@ -19,4 +19,4 @@ SipLoader is an SI-oriented page loader.
 It implements the cumulative predictive-reactive scheduling framework through three key techniques, i.e.,
 Dependency Mmerged Greedy Inference, Predictive Element Region Forest, and Event-Driven Reactive Co-Scheduling.
 
-We provide the prototype system on [GitHub]() as well as the measurement data on [Google Drive]().
+We provide the prototype system on [GitHub](https://github.com/SipLoader/SipLoader.github.io) as well as the measurement data on [Google Drive](https://drive.google.com/drive/folders/1ZtvnsEo7fvksBm6T--Dw7YSj9X007ll6?usp=sharing).
