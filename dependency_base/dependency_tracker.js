@@ -84,11 +84,11 @@ var cssUrl = {};
             initiator = undefinedURL;
         }
 
-        if (initiator == '') {
+        if (initiator == "") {
             initiator = parameters.documentURL;
         }
 
-        if (target == '') {
+        if (target == "") {
             target = parameters.documentURL;
         }
 

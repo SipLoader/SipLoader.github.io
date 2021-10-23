@@ -6,7 +6,7 @@ import sys
 sys.path.append('../utils')
 from siploader_common import get_top_sites
 
-sites = get_top_sites(2000)
+sites = get_top_sites(20)
 
 print(sites)
 

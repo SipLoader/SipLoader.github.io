@@ -53,7 +53,11 @@ var browser = null;
         await delay(100);
     
         try {
-            await page.goto(url, {timeout: 20000});
+            if (suffix == 'ours') {
+                await page.goto(url, {timeout: 20000});
+            } else {
+                await page.goto(url, {timeout: 20000});
+            }
             await delay(1000);
         } catch (error) {
             console.log('Navigation timeout...');
