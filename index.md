@@ -1,4 +1,4 @@
-## Fusing Speed Index during Web Page Loading
+# SipLoader
 
 With conventional web page load metrics (e.g., Page Load Time) being blamed for deviating from actual user
 experiences, in recent years a more sensible and complex metric called Speed Index (SI) has been widely
@@ -13,7 +13,7 @@ scheduling when uncertainties actually occur, based on efficient design that ful
 nature of SI calculation. Evaluations show that SipLoader improves the median SI by 41%, and provides
 1.43×–1.99× more benefits than state-of-the-art solutions with little computation and traffic overhead.
 
-### SipLoader
+### Implementation & Data
 
 SipLoader is an SI-oriented page loader.
 It implements the cumulative predictive-reactive scheduling framework through three key techniques, i.e.,
