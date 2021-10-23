@@ -15,38 +15,22 @@ var urlEvaled = new Set();
 
 console.log('Initialize SipLoader successfully!');
 
-for ( var i = 0; i < siploaderChunkedHTML.length; i++ ) {
-    if (siploaderChunkedHTML[i].indexOf("<\\/script>") != -1) {
-        siploaderChunkedHTML[i] = "</sc" + "ript>";
-    }
-}
-
 // inflate html
 
 (() => {
+    for (var i = 0; i < siploaderChunkedHTML.length; i++) {
+        if (siploaderChunkedHTML[i].indexOf('<\\/script>') != -1) {
+            siploaderChunkedHTML[i] = '</sc' + 'ript>';
+        }
+    }
     if ( document.body == null ) {
-        var c = document.createElement("body");
+        var c = document.createElement('body');
         document.firstChild.appendChild(c);
     }
 
     var rawHTML = '';
     
     for (var i = 0; i < siploaderChunkedHTML.length; i++) {
-        // if (siploaderChunkedHTML[i].indexOf("<body") < 0 && siploaderChunkedHTML[i].indexOf("</body") < 0) {
-        //     rawHTML += siploaderChunkedHTML[i] + '\n';
-        // }
-
-        // if (siploaderChunkedHTML[i].indexOf("<body") >= 0) {
-        //     inBody = true;
-        //     continue;
-        // } else if (siploaderChunkedHTML[i].indexOf("</body") >= 0) {
-        //     inBody = false;
-        //     continue;
-        // }
-
-        // if (inBody) {
-        //     rawHTML += siploaderChunkedHTML[i] + '\n';
-        // }
         rawHTML += siploaderChunkedHTML[i] + '\n';
     }
     document.body.innerHTML = rawHTML;

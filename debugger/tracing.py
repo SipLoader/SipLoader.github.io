@@ -47,9 +47,6 @@ for site in sites:
     domain = site['domain']
     url = site['url']
 
-    # if domain == 'qq.com':
-    #     break
-
     if domain in data:
         print('%s already exists.' % (domain))
         continue
@@ -78,7 +75,7 @@ for site in sites:
             time.sleep(1)
             p_webreplay.stdin.write(cmd2 + '\n')
             time.sleep(1)
-        except Exception, e:
+        except Exception as e:
             print(e)
 
         sec = 0
@@ -100,7 +97,7 @@ for site in sites:
             os.system('pkill -9 chrome-*')
             p_webreplay.kill()
             os.system('pkill apache2')
-        except Exception, e:
+        except Exception as e:
             print(e)
         
         os.system('rm -rf TRACE_OK')
