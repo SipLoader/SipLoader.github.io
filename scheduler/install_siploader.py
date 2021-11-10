@@ -23,12 +23,10 @@ for site in sites:
         print('%s already exists.' % (out_dir))
         continue
 
-    # recorded folder to be copied and rewritten
     recorded_folder = record_dir
     rewritten_folder = out_dir
 
     try:
-        # recorded folder to be copied and rewritten
         graph = json.load(open('../dependency_base/cost_gain_graph/%s.json' % (domain), 'r'))
         # print(graph)
 
@@ -37,6 +35,8 @@ for site in sites:
 
         inline_js = json.load(open('./inline_js/%s.json' % (domain), 'rb'))
         # print(inline_js)
+
+        perf = json.load(open('../per/per_data/%s.json' % (domain), 'r'))
     except:
         graph = {}
         url_tag_ids = {}
@@ -107,6 +107,7 @@ for site in sites:
     # print(chunked_htmls)    
     
     scheduler_init = "<script>\nwindow.siploaderGraph = " + json.dumps(graph) +";\n"
+    scheduler_init += "window.siploaderPERF = " + json.dumps(perf) +";\n"
 
     # temp folder to store rewritten protobufs
     os.system("rm -rf rewritten")

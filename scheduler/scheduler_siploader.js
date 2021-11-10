@@ -2,6 +2,7 @@
 // window.siploaderTagId
 // window.siploaderChunkedHTML
 // window.siploaderInlineJS
+// window.siploaderPERF
 
 const MAX_CONNECTION = 6;
 const MESSAGE_POOL_INIT = 'MESSAGE_POOL_INIT';
@@ -13,24 +14,52 @@ var inflightPool = {};
 var waitingForEvalPool = {};
 var urlEvaled = new Set();
 
+var perf = undefined;
+
+for (let i = 0; i < siploaderPERF.length; i++) {
+    if (window.innerWidth >= siploaderPERF[i].widthMin && window.innerWidth < siploaderPERF[i].widthMax) {
+        perf = siploaderPERF[i].regions;
+    }
+}
+
+if (typeof(perf) == 'undefined') {
+    perf = siploaderPERF[siploaderPERF.length - 1].regions;
+}
+
 console.log('Initialize SipLoader successfully!');
+
+for ( var i = 0; i < siploaderChunkedHTML.length; i++ ) {
+    if (siploaderChunkedHTML[i].indexOf("<\\/script>") != -1) {
+        siploaderChunkedHTML[i] = "</sc" + "ript>";
+    }
+}
 
 // inflate html
 
 (() => {
-    for (var i = 0; i < siploaderChunkedHTML.length; i++) {
-        if (siploaderChunkedHTML[i].indexOf('<\\/script>') != -1) {
-            siploaderChunkedHTML[i] = '</sc' + 'ript>';
-        }
-    }
     if ( document.body == null ) {
-        var c = document.createElement('body');
+        var c = document.createElement("body");
         document.firstChild.appendChild(c);
     }
 
     var rawHTML = '';
     
     for (var i = 0; i < siploaderChunkedHTML.length; i++) {
+        // if (siploaderChunkedHTML[i].indexOf("<body") < 0 && siploaderChunkedHTML[i].indexOf("</body") < 0) {
+        //     rawHTML += siploaderChunkedHTML[i] + '\n';
+        // }
+
+        // if (siploaderChunkedHTML[i].indexOf("<body") >= 0) {
+        //     inBody = true;
+        //     continue;
+        // } else if (siploaderChunkedHTML[i].indexOf("</body") >= 0) {
+        //     inBody = false;
+        //     continue;
+        // }
+
+        // if (inBody) {
+        //     rawHTML += siploaderChunkedHTML[i] + '\n';
+        // }
         rawHTML += siploaderChunkedHTML[i] + '\n';
     }
     document.body.innerHTML = rawHTML;
@@ -131,6 +160,21 @@ function initGraphData() {
         if (siploaderGraph[url].type != 'stylesheet' && !siploaderGraph[url].visible) {
             siploaderGraph[url].gain = 0;
         }
+
+        if (perf.hasOwnProperty(url)) {
+            var visible = false;
+            for (var pt of perf[url]) {
+                if (pt.x >= 0 && pt.x <= window.innerWidth && pt.y >= 0 && pt.y <= window.innerHeight) {
+                    visible = true;
+                    break;
+                }
+            }
+
+            if (!visible) {
+                siploaderGraph[url].gain = 0;
+            }
+        }
+
         nodeNumber++;
         var s = new Set();
         s.add(url);
