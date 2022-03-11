@@ -457,4 +457,6 @@ XMLHttpRequest.prototype.send = function(){
     _xhrsend.call(this)
 };
 
+document.currentScript.parentElement.removeChild(document.currentScript);
+
 </script>
