@@ -141,6 +141,10 @@ for site in sites:
             if 'gzip' in meta['Content-Encoding']:
                 os.system('gzip -d -c rewritten/response > rewritten/response1')
                 os.system('mv rewritten/response1 rewritten/response')
+            elif 'br' in meta['Content-Encoding']:
+                os.system('mv rewritten/response rewritten/response.br')
+                os.system('brotli -d rewritten/response.br -o rewritten/response')
+                os.system('rm rewritten/response.br')
             if 'html' in meta['Content-Type']:
                 if object_url in url_tag_ids and object_url in chunked_htmls and object_url in inline_js:
                     scheduler_init = scheduler_init + "window.siploaderTagId = " + json.dumps(url_tag_ids[object_url]) +";\n"
@@ -157,6 +161,8 @@ for site in sites:
                 os.system("mv rewritten/cssfile rewritten/response")
             if 'gzip' in meta['Content-Encoding']:
                 os.system("gzip -c rewritten/response > rewritten/result")
+            elif 'br' in meta['Content-Encoding']:
+                os.system("brotli rewritten/response -o rewritten/result")
             else:
                 os.system("cp rewritten/response rewritten/result")
             
